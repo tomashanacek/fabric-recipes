@@ -1,4 +1,6 @@
 Fabric==1.7.0
+Jinja2==2.7.1
+MarkupSafe==0.18
 paramiko==1.11.0
 pycrypto==2.6
 wsgiref==0.1.2
