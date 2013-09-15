@@ -1,9 +1,9 @@
 from fabric.api import env, task, run
-from fabric.context_managers import cd
 from fabric.operations import require
 from context_managers import virtualenv
 import supervisor
 import nginx
+import utils
 
 
 @task
@@ -13,16 +13,13 @@ def setup():
         "repository", "project_name")
 
     # 1. clone project
-    with cd(env.www_directory):
-        run("git clone %s %s" % (env.repository, env.project_name))
+    utils.clone_project()
 
     # 2. create virtualenv
-    with cd(env.directory):
-        run("virtualenv venv")
+    utils.create_virtualenv()
 
     # 3. install requirements
-    with virtualenv():
-        run("pip install -r requirements.txt")
+    utils.install_requirements()
 
     # 4. configure supervisor
     env.supervisor = {
